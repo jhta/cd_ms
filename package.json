@@ -1,0 +1,29 @@
+{
+  "name": "code-challenge-ms",
+  "version": "1.0.0",
+  "description": "Code Challenge for mattersupply.co",
+  "main": "page/index.js",
+  "author": "jhta <jeisonhs93@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^6.1.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development next",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
+    "lint": "standard --verbose",
+    "lint:fix": "standard --fix"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-react": "^6.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^3.1.0"
+  }
+}
