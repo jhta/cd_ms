@@ -2,8 +2,13 @@ const express = require('express')
 const next = require('next')
 const axios = require('axios')
 const qs = require('query-string')
+const getConfig = require('next/config')
 
-const port = parseInt(process.env.port, 10) || 3000
+const config  = getConfig().serverRuntimeConfig
+// @TODO confiure global vars
+
+
+const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 
 const app = next({ dev })
@@ -50,7 +55,7 @@ app.prepare()
 
     server.listen(port, err => {
       if (err) throw err
-      console.log(`>Ready on http://localhost:${port}`)
+      console.log(`>Ready on ${process.env.DOMAIN}`)
     })
 
   })
