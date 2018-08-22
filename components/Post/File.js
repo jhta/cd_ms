@@ -1,9 +1,12 @@
 import React from 'react'
+import Highlight from 'react-highlight'
 
-const File = ({ content, filename }) => (
+const File = ({ content, filename, language }) => (
   <div>
     <h2>{ filename }</h2>
-    <p>{ content }</p>
+    <Highlight language={language.toLowerCase()}>
+      { content }
+    </Highlight>
   </div>
 )
 

@@ -4,7 +4,8 @@ import { pick as _pick } from 'lodash'
 const fileParams = [
   'content',
   'language',
-  'type'
+  'type',
+  'filename'
 ]
 
 const parseFiles = (files = {}) => Object.values(files)
