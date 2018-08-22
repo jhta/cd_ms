@@ -1,9 +1,12 @@
 import React from 'react'
 import MetaFileList from './Metafiles'
+import Link from 'next/link'
 
-const Item = ({ timeAgo = '', files = [], filesLength,  description }) => (
+const Item = ({ id, timeAgo, files = [], filesLength,  description, hash }) => (
   <li>
-    <h2>{ description }</h2>
+    <Link href={`/post?id=${id}`} as={`/post/${hash}`}>
+      <h2>{ description }</h2>
+    </Link>
     <MetaFileList files={files} />
     {
       (filesLength > 3)
