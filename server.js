@@ -4,8 +4,10 @@ const axios = require('axios')
 const qs = require('query-string')
 const getConfig = require('next/config')
 const debug = require('debug')('server')
+const GithubAuth = require('./services/github/auth')
 
 // @TODO confiure global vars
+// @TODO refactorize everything!
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -15,6 +17,12 @@ const handle = app.getRequestHandler()
 
 const morgan = require('morgan-debug')('server', 'dev', {
   skip: (req, res) => req.url.includes('_next')
+})
+
+const authClient = GithubAuth({
+  clientId: 'e2267034308110300976',
+  clientSecret: 'e52ea76a7670f0ca6211abb463e43301c0e44d45',
+  callbackUrl: 'http://localhost:3000/login/github/callback'
 })
 
 app.prepare()
@@ -29,10 +37,7 @@ app.prepare()
       saveUninitialized: true
     }))
 
-    server.get('/login/github', (req, res) => {
-      debug('login github redirecting')
-      res.redirect('https://github.com/login/oauth/authorize?client_id=e2267034308110300976')
-    })
+    server.get('/login/github', authClient.redirectToAuthorize)
 
     server.get('/login/github/callback', (req, res) => {
       debug('login callback, ready for get the access token')
