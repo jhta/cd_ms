@@ -19,5 +19,13 @@ const parseResponse = response => response.status !== 200 ?
   );
 
 
-export const list = (token) => axios(buildURL('gists'), setHeaders(token || getToken()))
+export const list = (token) => axios(
+  buildURL('gists'),
+  setHeaders(token || getToken())
+)
 
+export const gist = (id, token) => !id
+  ? Promise.reject(new Error('id is not defined at /gist/gist_id'))
+  : axios(
+    buildURL('/gists/id')
+  )

@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react'
 import List from '../components/List'
 
 import withAuth from '../utils/oauth/withAuth'
-import { list as listGist } from '../services/github/api'
+import { list as fetchList } from '../services/github/api'
 import parseList from '../utils/parser/list'
 
 import debug from 'debug'
@@ -22,7 +22,7 @@ class App extends Component {
 
 App.getInitialProps = async ({ token }) => {
   try {
-    const response = await listGist(token)
+    const response = await fetchList(token)
     pagesDebug('gists fetched', response.status)
     if (response.status === 200) {
       return {
