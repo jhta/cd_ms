@@ -20,9 +20,9 @@ const morgan = require('morgan-debug')('server', 'dev', {
 })
 
 const authClient = GithubAuth({
-  clientId: 'e2267034308110300976',
-  clientSecret: 'e52ea76a7670f0ca6211abb463e43301c0e44d45',
-  callbackUrl: 'http://localhost:3000/login/github/callback'
+  client_id: 'e2267034308110300976',
+  client_secret: 'e52ea76a7670f0ca6211abb463e43301c0e44d45',
+  redirect_uri: 'http://localhost:3000/login/github/callback'
 })
 
 app.prepare()
@@ -40,20 +40,15 @@ app.prepare()
     server.get('/login/github', authClient.redirectToAuthorize)
 
     server.get('/login/github/callback', (req, res) => {
-      debug('login callback, ready for get the access token')
-      axios.post('https://github.com/login/oauth/access_token', {
-        client_id: 'e2267034308110300976',
-        client_secret: 'e52ea76a7670f0ca6211abb463e43301c0e44d45',
-        redirect_uri: 'http://localhost:3000/login/github/callback',
-        code: req.query.code
-      }).then((apiResponse = {}) => {
-        const query = qs.parse(apiResponse.data) || {}
-        debug('access token receive, ready for add the session cookie')
-        req.session = req.session || {}
-        req.session.token = query.access_token
-        res.cookie('access_token', query.access_token)
-        app.render(req, res, '/')
-      })
+      authClient.getToken(req, res)
+        .then((apiResponse = {}) => {
+          const query = qs.parse(apiResponse.data) || {}
+          debug('access token receive, ready for add the session cookie')
+          req.session = req.session || {}
+          req.session.token = query.access_token
+          res.cookie('access_token', query.access_token)
+          app.render(req, res, '/')
+        })
     })
 
     server.get('*', (req, res) => handle(req, res))
