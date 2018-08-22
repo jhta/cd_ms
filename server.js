@@ -3,10 +3,9 @@ const next = require('next')
 const axios = require('axios')
 const qs = require('query-string')
 const getConfig = require('next/config')
+const debug = require('debug')('server')
 
-const config  = getConfig().serverRuntimeConfig
 // @TODO confiure global vars
-
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -14,14 +13,12 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const morgan = require('morgan')('dev', {
+const morgan = require('morgan-debug')('server', 'dev', {
   skip: (req, res) => req.url.includes('_next')
 })
 
-
 app.prepare()
   .then(() => {
-
     const server = express()
     server.use(morgan)
     server.use(require('cookie-parser')())
@@ -33,10 +30,12 @@ app.prepare()
     }))
 
     server.get('/login/github', (req, res) => {
+      debug('login github redirecting')
       res.redirect('https://github.com/login/oauth/authorize?client_id=e2267034308110300976')
     })
 
-    server.get('/login/github/callback',(req, res) => {
+    server.get('/login/github/callback', (req, res) => {
+      debug('login callback, ready for get the access token')
       axios.post('https://github.com/login/oauth/access_token', {
         client_id: 'e2267034308110300976',
         client_secret: 'e52ea76a7670f0ca6211abb463e43301c0e44d45',
@@ -44,6 +43,7 @@ app.prepare()
         code: req.query.code
       }).then((apiResponse = {}) => {
         const query = qs.parse(apiResponse.data) || {}
+        debug('access token receive, ready for add the session cookie')
         req.session = req.session || {}
         req.session.token = query.access_token
         res.cookie('access_token', query.access_token)
@@ -55,7 +55,7 @@ app.prepare()
 
     server.listen(port, err => {
       if (err) throw err
-      console.log(`>Ready on ${process.env.DOMAIN}`)
+      debug('server running')
+      console.log(`>Ready on ${process.env.DOMAIN || "http://localhost:3000"}`)
     })
-
   })

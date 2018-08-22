@@ -13,8 +13,6 @@ const defaultValues = {
   GITHUB_SECRET: ''
 }
 
-
-
 const config = Object.keys(defaultValues)
   .reduce(
     (values, key) => ({
