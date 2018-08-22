@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-const parseHash = desc => desc.replace(/\s+/g, '-').toLowerCase()
+const parseHash = desc => desc.replace(/\s+|\//g, '-').toLowerCase()
 
 const parseFiles = (files = {}) => Object.values(files)
   .slice(0, 3)

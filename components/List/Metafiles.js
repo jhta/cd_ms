@@ -20,5 +20,3 @@ const MetaFileList = ({ files = [] }) => files.length && (
 )
 
 export default MetaFileList
-
-

@@ -34,7 +34,7 @@ App.getInitialProps = async ({ token }) => {
       error: `error: ${response.status}`,
       data: []
     }
-      } catch (e) {
+  } catch (e) {
     pagesDebug(`error: ${e.status}: ${e.message}`)
     return {
       error: e.message,

@@ -10,12 +10,12 @@ const List = ({ items = [] }) => items.length
       <style jsx>{`
         ul {
           list-style: none;
-          border: 1px solid red;
+          padding: 0;
+          margin: 0;
         }
         `}</style>
     </ul>
   )
   : null
-
 
 export default List

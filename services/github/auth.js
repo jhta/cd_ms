@@ -6,7 +6,7 @@ const { AUTHORIZE_URL, ACCESS_TOKEN_URL } = constants
 module.exports = (config = {}) => {
   const { client_id, client_secret, redirect_uri } = config
 
- return {
+  return {
     redirectToAuthorize: (req, res) => {
       debug('login github redirecting')
       res.redirect(`${AUTHORIZE_URL}?client_id=${client_id}`)
@@ -21,7 +21,5 @@ module.exports = (config = {}) => {
         code: req.query.code
       })
     }
- }
+  }
 }
-
-

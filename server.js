@@ -56,6 +56,6 @@ app.prepare()
     server.listen(port, err => {
       if (err) throw err
       debug('server running')
-      console.log(`>Ready on ${process.env.DOMAIN || "http://localhost:3000"}`)
+      console.log(`>Ready on ${process.env.DOMAIN || 'http://localhost:3000'}`)
     })
   })
