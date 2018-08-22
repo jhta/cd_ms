@@ -47,7 +47,7 @@ app.prepare()
           req.session = req.session || {}
           req.session.token = query.access_token
           res.cookie('access_token', query.access_token)
-          app.render(req, res, '/')
+          res.redirect('/')
         })
     })
 
