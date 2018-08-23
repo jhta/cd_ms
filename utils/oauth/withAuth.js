@@ -7,8 +7,8 @@ const serverDebug = debug('server')
 export default function withAuth (BaseComponent) {
   class AuthComponent extends Component {
     static async getInitialProps (ctx = {}) {
-      const { req } = ctx
-      const token = _get(req, 'session.token', '')
+      const { req, res } = ctx
+      const token = _get(req, 'session.token', null) || _get(res, 'cookies.access_token', '')
       const initialProps = BaseComponent.getInitialProps
         ? await BaseComponent.getInitialProps({...ctx, token})
         : {}

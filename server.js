@@ -51,6 +51,14 @@ app.prepare()
         })
     })
 
+    server.get('/create-gist', (req, res) => {
+      return app.render(req, res, '/create')
+    })
+
+    server.get('/', (req, res) => {
+      return app.render(req, res, '/')
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })
