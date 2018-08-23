@@ -19,7 +19,6 @@ export default function withAuth (BaseComponent) {
 
     componentDidMount () {
       const { token } = this.props
-      console.log(token)
       if (!isLogged() && token) persitsToken(token)
     }
 
