@@ -9,7 +9,7 @@ module.exports = (config = {}) => {
   return {
     redirectToAuthorize: (req, res) => {
       debug('login github redirecting')
-      res.redirect(`${AUTHORIZE_URL}?client_id=${client_id}`)
+      res.redirect(`${AUTHORIZE_URL}?client_id=${client_id}&scope=gist`)
     },
 
     getToken: (req, res) => {
@@ -18,6 +18,7 @@ module.exports = (config = {}) => {
         client_id,
         client_secret,
         redirect_uri,
+        scope: 'gist',
         code: req.query.code
       })
     }

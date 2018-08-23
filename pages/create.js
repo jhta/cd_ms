@@ -2,6 +2,9 @@ import React from 'react'
 import Markdown from 'react-markdown'
 import Editor from '../components/Form/Editor'
 import FileList from '../components/Form/FileList'
+import withAuth from '../utils/oauth/withAuth'
+
+import { createGist } from '../services/github/api'
 
 // @TODO: add validations
 class Form extends React.Component {
@@ -41,8 +44,24 @@ class Form extends React.Component {
     }
  }
 
-  handleSubmit = event => {
+  handleSubmit = async (event) => {
     event.preventDefault()
+    const { files, description } = this.state
+    const { token } = this.props
+
+    if (!Object.keys(files).length) return false;
+    const data = {
+      files,
+      description,
+      public: true
+    }
+
+    try {
+      const response = await createGist(data, token)
+      window.location.replace('/')
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   render () {
@@ -84,4 +103,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+export default withAuth(Form)

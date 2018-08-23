@@ -22,3 +22,10 @@ export const gist = (id, token) => !id
   : axios(
     buildURL(`gists/${id}`)
   )
+
+export const createGist = (data, token) => axios({
+  method: 'post',
+  url: buildURL('gists'),
+  data,
+  headers: setHeaders(token || getToken()).headers
+})
