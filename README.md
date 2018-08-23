@@ -1,5 +1,4 @@
-# cd_ms
-nop
+
 # RetroBlog
 ____
 ### Scripts
@@ -20,3 +19,7 @@ ____
 * Standard.js for Linting
 * Express.js for manage custom routes, github api auth and response endpoints.
 * React-reveal, moment, lodash, react markdown and more.
+
+## Testing:
+
+I would like implement a testing env with Jest, Stub, Yup and Enzyme
