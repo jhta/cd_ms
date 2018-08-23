@@ -19,7 +19,10 @@ class App extends Component {
   }
 }
 
-App.getInitialProps = async ({ token }) => {
+App.getInitialProps = async ({ token, res }) => {
+  if (!token) {
+    res.redirect('/login')
+  }
   try {
     const response = await fetchList(token)
     pagesDebug('gists fetched', response.status)

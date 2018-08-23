@@ -49,6 +49,7 @@ app.prepare()
 
     server.get('/login/github', authClient.redirectToAuthorize)
 
+    // TODO: PLEEEEASEEEEE move the secret params to process.env conf
     server.get('/login/github/callback', (req, res) => {
       authClient.getToken(req, res)
         .then((apiResponse = {}) => {

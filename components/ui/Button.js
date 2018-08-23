@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button = ({ text }) => (
+const Button = ({ text, font = 1 }) => (
   <button>
     {text}
     <style jsx>{`
@@ -9,8 +9,8 @@ const Button = ({ text }) => (
       box-shadow: none;
       border: 2px solid black;
       color: white;
-      padding: .5rem 1rem;
-      font-size: 1rem;
+      padding: ${font / 2}rem ${font}rem;
+      font-size: ${font}rem;
       font-weight: bold;
       cursor: pointer;
       }

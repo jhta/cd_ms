@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import FileList from '../components/Post/FileList'
 import Fade from 'react-reveal/Fade'
+import Button from '../components/ui/Button'
 
 import withAuth from '../utils/oauth/withAuth'
 import { gist as fetchGist } from '../services/github/api'
@@ -14,10 +15,19 @@ const Post = ({ description, owner = {}, timeAgo, files }) => (
       <p className='time'>{`(${timeAgo})`}</p>
       <p>created by: <a href={owner.url}>@{owner.user}</a></p>
       <FileList files={files} />
+      <div>
+        <a href='/'><Button text='< BACK' font={1.2}/></a>
+      </div>
       <style jsx>{`
         .time {
           color: #888;
           font-weight: bold;
+        }
+        div {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin-top: 3rem;
         }
         `}</style>
     </Layout>
