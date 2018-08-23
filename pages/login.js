@@ -1,1 +1,3 @@
-export default () => <h1>login</h1>
+
+
+export default () => <a href='/login/github'>login</a>

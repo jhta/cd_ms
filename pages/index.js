@@ -5,17 +5,16 @@ import withAuth from '../utils/oauth/withAuth'
 import { list as fetchList } from '../services/github/api'
 import parseList from '../utils/parser/list'
 
+import Layout from '../components/Layout'
 import debug from 'debug'
 const pagesDebug = debug('pages')
 
 class App extends Component {
   render () {
     return (
-      <Fragment>
-        <a href='/login/github'>Hello</a>
-        <h2>token: {this.props.token}</h2>
+      <Layout>
         <List items={this.props.data} />
-      </Fragment>
+      </Layout>
     )
   }
 }

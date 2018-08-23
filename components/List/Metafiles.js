@@ -2,10 +2,13 @@ import React from 'react'
 
 const MetaFile = ({ filename, language }) => (
   <span>
-    {`${filename} (${language})`}
+    <bold>*</bold>{` ${filename} (${language})`}
     <style jsx>{`
       span {
         display: block;
+      }
+      bold {
+        font-weight: bold;
       }
       `}</style>
   </span>

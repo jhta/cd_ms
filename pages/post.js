@@ -1,16 +1,27 @@
 import React, { Fragment } from 'react'
 import FileList from '../components/Post/FileList'
+import Fade from 'react-reveal/Fade'
+
 import withAuth from '../utils/oauth/withAuth'
 import { gist as fetchGist } from '../services/github/api'
 import parseGist from '../utils/parser/gist'
+import Layout from '../components/Layout'
 
 const Post = ({ description, owner = {}, timeAgo, files }) => (
-  <Fragment>
-    <h1>{description}</h1>
-    <p>{timeAgo}</p>
-    <p>created by: <a href={owner.url}>@{owner.user}</a></p>
-    <FileList files={files} />
-  </Fragment>
+  <Fade>
+    <Layout>
+      <h1>{description}</h1>
+      <p className='time'>{`(${timeAgo})`}</p>
+      <p>created by: <a href={owner.url}>@{owner.user}</a></p>
+      <FileList files={files} />
+      <style jsx>{`
+        .time {
+          color: #888;
+          font-weight: bold;
+        }
+        `}</style>
+    </Layout>
+  </Fade>
 )
 
 Post.getInitialProps = async ({ query }) => {

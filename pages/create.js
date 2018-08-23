@@ -1,6 +1,8 @@
 import React from 'react'
 import Markdown from 'react-markdown'
 import Editor from '../components/Form/Editor'
+import Bottom from '../components/Form/Bottom'
+import Input from '../components/ui/Input'
 import FileList from '../components/Form/FileList'
 import withAuth from '../utils/oauth/withAuth'
 
@@ -68,36 +70,21 @@ class Form extends React.Component {
     const { code, filename, description, files } = this.state
     return (
       <div>
-        <p>Description: </p>
-        <input
-            type='text'
-            name='description'
-            value={description}
-            placeholder='my nice gist'
-            onChange={this.handleChange}
-          />
+        <Input name='description' value={description} handleChange={this.handleChange} />
         <form onSubmit={this.handleSubmit}>
-          <input
-            type='text'
-            name='filename'
-            value={filename}
-            placeholder='name.md'
-            onChange={this.handleChange}
-          />
+          <Input name='filename' value={filename} handleChange={this.handleChange} />
           <Editor handleChange={this.handleChange} code={code} />
           <div>
             <FileList files={files} />
           </div>
-          <div>
-            <button>Save!</button>
-            <a href='#' onClick={this.handleAddFile}>add other file</a>
-            <style jsx>{`
-              div {
-                display: flex;
-              }
-              `}</style>
-          </div>
+          <Bottom handleAddFile={this.handleAddFile}/>
         </form>
+        <style jsx>{`
+          form {
+            width: 100%;
+            position: relative;
+          }
+          `}</style>
       </div>
     )
   }

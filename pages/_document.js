@@ -16,13 +16,28 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-cave-dark.min.css" />
           <style>{`
           body {
+            font-size: 14px;
             margin: 0;
-            font-family: sans-serif;
+            font-family: monospace;
             box-sizing: border-box;
             height: 100vh;
          }
           #__next {
             height: 100vh;
+            overflow-x: hidden;
+          }
+          a {
+            color: black;
+          }
+
+          h1 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+          }
+
+          ul {
+            margin: 0;
+            padding: 0;
           }
           `}</style>
         </Head>
